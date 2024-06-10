@@ -16,11 +16,13 @@
                 <h1>Peliculas que satisfacen los criterios de busqueda:</h1>
             </div>
         </div>
+        
+        <div class="row" id="movies-container"></div>
     </div>
 
     <script>
         const apiKey = '3941bb9268667c980b06bf9a9a0d597b'
-        const apiURL = `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}`
+        const apiURL = `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&page=1`
         function data_recieved(data){
             console.log("SUCCESS")
             console.log(data)
@@ -29,19 +31,33 @@
         }
         function parse_data(content){
             console.log(content)
-
-            const list = document.getElementById()
+            const moviescontainer = document.getElementById('movies-container');
+            content.results.forEach(movie => {
+                const moviecard = document.createElement('div');
+                moviecard.setAttribute("class", "col-2 mb-4");
+                moviecard.innerHTML = `
+                        <div class="card">
+                            <h5 class="card-title">${movie.title} (${movie.release_date.substring(0, 4)})</h5>
+                            <img src="https://image.tmdb.org/t/p/w500/${movie.poster_path}" class="card-img-top" alt="${movie.title}">
+                            <div class="card-body">
+                                <p class="card-text">Rating: ${movie.vote_average.toFixed(1)}/10</p>
+                                <p class="card-text">Generos: ${movie.genre_ids}</p>
+                            </div>
+                        </div>
+                    </div>`;
+                moviescontainer.append(moviecard)
+            });
         }
         function request_error(error){
             console.log("ERROR")
             console.log(error)
         }
-
+        
         fetch(apiURL)
             .then(data_recieved)
             .then(parse_data)
             .catch(request_error)
         
-
+        
 
     </script>
