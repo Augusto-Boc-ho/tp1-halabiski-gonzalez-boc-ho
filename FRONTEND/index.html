@@ -13,7 +13,35 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <h1>Peliculas</h1>
+                <h1>Peliculas que satisfacen los criterios de busqueda:</h1>
             </div>
         </div>
     </div>
+
+    <script>
+        const apiKey = '3941bb9268667c980b06bf9a9a0d597b'
+        const apiURL = `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}`
+        function data_recieved(data){
+            console.log("SUCCESS")
+            console.log(data)
+
+            return data.json()
+        }
+        function parse_data(content){
+            console.log(content)
+
+            const list = document.getElementById()
+        }
+        function request_error(error){
+            console.log("ERROR")
+            console.log(error)
+        }
+
+        fetch(apiURL)
+            .then(data_recieved)
+            .then(parse_data)
+            .catch(request_error)
+        
+
+
+    </script>
