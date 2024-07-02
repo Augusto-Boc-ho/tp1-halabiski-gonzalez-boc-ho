@@ -44,10 +44,18 @@
     <main class="container-fluid">
         <section class="highlight">
             <div class="highlight-content">
-                <h1 class="highlight-title">Película Destacada</h1>
-                <p class="highlight-description">Una breve descripción de la película destacada. Disfruta de esta emocionante película ahora.</p>
-                <a href="https://www.youtube.com/watch?v=O5BOxn8Go8U" target="_blank"><button class="btn btn-primary btn-lg">Reproducir</button></a>
-                <button class="btn btn-secondary btn-lg">Más información</button>
+                <h1 class="highlight-title">Nuevo trailer: Rapidos y Furiosos X</h1>
+                <div id="player"></div>
+                <script src="https://www.youtube.com/iframe_api" async></script>
+                <script>
+                    function onYouTubeIframeAPIReady() {
+                        var player = new YT.Player('player', {
+                            height: '360',
+                            width: '640',
+                            videoId: 'O5BOxn8Go8U',
+                        });
+                    }
+                </script>
             </div>
         </section>
         <section class="movie-section">
