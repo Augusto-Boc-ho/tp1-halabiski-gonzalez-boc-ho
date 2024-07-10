@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Principal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1 id="bienvenida"></h1>
+    <a href="{{ url_for('logout') }}" class="button-logout">Logout</a>
+    <div class="container_lista" id="mi_lista">
+        <h2>Mi lista</h2>
+    </div>
+    <p id="peliculaDiv">¡Aquí están todas las películas disponibles!</p>
+    <div class="container" id="peliculas"></div>
+    <script>
+        const userName = "{{ nombre }}";
+        document.getElementById('bienvenida').innerText = '¡Bienvenido, ' + userName + '!';
+
+        function obtenerPeliculas() {
+            fetch('/peliculas')
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(pelicula => {
+                        const peliculaDiv = document.createElement('div');
+                        peliculaDiv.innerHTML = `
+                            <h2>${pelicula.titulo}</h2>
+                            <p><strong>Descripción:</strong> ${pelicula.descripcion}</p>
+                            <p><strong>Duración:</strong> ${pelicula.duracion} minutos</p>
+                            <p><strong>Año de creación:</strong> ${pelicula.año_creacion}</p>
+                            <p><strong>Saga:</strong> ${pelicula.saga}</p>
+                            <p><strong>Link al trailer:</strong> <a href="${pelicula.link_trailer}" target="_blank">Ver trailer</a></p>
+                            <p><strong>Link a la imagen:</strong> <a href="${pelicula.link_imagen}" target="_blank">Ver imagen</a></p>
+                            <button class="button" id="add-${pelicula.id}" onclick="agregarPelicula(${pelicula.id})">Agregar a mi lista</button>
+                        `;
+                        document.getElementById('peliculas').appendChild(peliculaDiv);
+                    });
+                    obtenerListaUsuario();
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        function obtenerListaUsuario() {
+            fetch('/mi-lista')
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(pelicula => {
+                        const peliculaDiv = document.createElement('div');
+                        peliculaDiv.id = `mi_lista-${pelicula.id}`;
+                        peliculaDiv.innerHTML = `
+                            <h2>${pelicula.titulo}</h2>
+                            <p><strong>Descripción:</strong> ${pelicula.descripcion}</p>
+                            <p><strong>Duración:</strong> ${pelicula.duracion} minutos</p>
+                            <p><strong>Año de creación:</strong> ${pelicula.año_creacion}</p>
+                            <p><strong>Saga:</strong> ${pelicula.saga}</p>
+                            <p><strong>Link al trailer:</strong> <a href="${pelicula.link_trailer}" target="_blank">Ver trailer</a></p>
+                            <p><strong>Link a la imagen:</strong> <a href="${pelicula.link_imagen}" target="_blank">Ver imagen</a></p>
+                            <button class="button" onclick="eliminarPelicula(${pelicula.id})">Eliminar de mi lista</button>
+                        `;
+                        document.getElementById('mi_lista').appendChild(peliculaDiv);
+                        document.getElementById(`add-${pelicula.id}`).disabled = true;
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        function agregarPelicula(idPelicula) {
+            fetch('/agregar-pelicula', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ id_pelicula: idPelicula })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.id) {
+                    const peliculaDiv = document.createElement('div');
+                    peliculaDiv.id = `mi_lista-${data.id}`;
+                    peliculaDiv.innerHTML = `
+                        <h2>${data.titulo}</h2>
+                        <p><strong>Descripción:</strong> ${data.descripcion}</p>
+                        <p><strong>Duración:</strong> ${data.duracion} minutos</p>
+                        <p><strong>Año de creación:</strong> ${data.año_creacion}</p>
+                        <p><strong>Saga:</strong> ${data.saga}</p>
+                        <p><strong>Link al trailer:</strong> <a href="${data.link_trailer}" target="_blank">Ver trailer</a></p>
+                        <p><strong>Link a la imagen:</strong> <a href="${data.link_imagen}" target="_blank">Ver imagen</a></p>
+                        <button class="button" onclick="eliminarPelicula(${data.id})">Eliminar de mi lista</button>
+                    `;
+                    document.getElementById('mi_lista').appendChild(peliculaDiv);
+                    document.getElementById(`add-${data.id}`).disabled = true;
+                } else {
+                    console.error('Error al agregar la película:', data.message);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        function eliminarPelicula(idPelicula) {
+            fetch('/eliminar-pelicula', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ id_pelicula: idPelicula })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.id) {
+                    const peliculaDiv = document.getElementById(`mi_lista-${data.id}`);
+                    document.getElementById('mi_lista').removeChild(peliculaDiv);
+                    document.getElementById(`add-${data.id}`).disabled = false;
+                } else {
+                    console.error('Error al eliminar la película:', data.message);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        window.onload = obtenerPeliculas;
+    </script>
+</body>
+</html>

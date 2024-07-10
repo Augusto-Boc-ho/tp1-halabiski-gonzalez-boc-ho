@@ -1,0 +1,147 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #141414;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    border: #f40612;
+}
+
+/* Estilos para el formulario de login y registro */
+form {
+    background-color: #333;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    margin-bottom: 20px;
+}
+
+form h2 {
+    margin-top: 0;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+.button {
+    display: inline-block;
+    background-color: #e50914;
+    color: #fff;
+    padding: 10px 20px 20px 20px;
+    border: none;
+    border-radius: 6%;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.button-logout {
+    display: inline-block;
+    background-color: #e50914;
+    color: #fff;
+    padding: 13px 13px 13px 13px;
+    border: none;
+    border-radius: 6%;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #f40612;
+}
+
+/* Estilos para la página principal */
+#movies-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.movie {
+    background-color: #333;
+    padding: 10px;
+    border-radius: 5px;
+    width: calc(25% - 20px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
+.movie img {
+    max-width: 100%;
+    border-radius: 5px;
+}
+
+.movie h3 {
+    margin: 10px 0;
+    font-size: 18px;
+}
+
+.movie p {
+    font-size: 14px;
+    color: #bbb;
+}
+
+.movie a {
+    display: inline-block;
+    margin-top: 10px;
+    color: #e50914;
+    text-decoration: none;
+}
+
+.movie a:hover {
+    text-decoration: underline;
+}
+
+/* Estilos para la página de detalle de película */
+#movie-details {
+    background-color: #333;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+#movie-details img {
+    max-width: 100%;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+#movie-details h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+#movie-details p {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+#movie-details a {
+    display: inline-block;
+    color: #e50914;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+#movie-details a:hover {
+    text-decoration: underline;
+}
