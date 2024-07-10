@@ -6,6 +6,9 @@ python3 -m venv venv
 source venv/bin/activate
 pip install flask
 pip install flask-cors
+pip install Flask-SQLAlchemy
+pip install psycopg2-binary
+pip install flask-login
 ```
 
 ## Run
@@ -13,5 +16,5 @@ pip install flask-cors
 ```bash
 source venv/bin/activate
 cd backend
-flask run --debug
+flask --app main.py run --debug
 ```
