@@ -1,0 +1,67 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+.background {
+    background-image: url('https://media.ambito.com/p/ef08ae119ea9964487fa8f7aa44b4649/adjuntos/239/imagenes/039/186/0039186974/1200x675/smart/facultad-ingenieria-ubajpg.jpg');
+    background-size: cover;
+    background-position: center center;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: cyan;
+}
+
+.container {
+    background-color: rgba(37, 37, 37, 0.75);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    width: 100%;
+    max-height: 500px;
+}
+
+.navbar {
+    margin-bottom: 30px;
+}
+
+.login-container {
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.form-control {
+    opacity: 0.85;
+    background-color: lightgrey;
+}
+
+.form-control:focus {
+    box-shadow: 0 0 10px cyan;
+}
+
+.login-form h2 {
+    margin-bottom: 20px;
+    font-weight: bolder;
+}
+
+.login-container h5 {
+    margin:0 20px;
+    text-align: center;
+    color: white;
+}
+
+.form-check-label {
+    color: white;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 20px;
+    color: white;
+}
