@@ -13,26 +13,24 @@
         </div>
     </div>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const movieId = urlParams.get('id');
-
-            fetch(`/pelicula/${movieId}`)
+        function obtenerPelicula(id) {
+            fetch(`/peliculas/${id}`)
                 .then(response => response.json())
-                .then(movie => {
-                    const detailsContainer = document.getElementById('movie-details');
-                    detailsContainer.innerHTML = `
-                        <h1>${movie.titulo}</h1>
-                        <img src="${movie.link_imagen}" alt="${movie.titulo}">
-                        <p>${movie.descripcion}</p>
-                        <p><strong>Duración:</strong> ${movie.duracion} minutos</p>
-                        <p><strong>Año de creación:</strong> ${movie.año_creacion}</p>
-                        <p><strong>Saga:</strong> ${movie.saga}</p>
-                        <a href="${movie.link_trailer}" target="_blank">Ver trailer</a>
+                .then(data => {
+                    const pelicula = data[0];
+                    const movieDetails = document.getElementById('movie-details');
+                    movieDetails.innerHTML = `
+                        <h2>${pelicula.titulo}</h2>
+                        <p><strong>Descripción:</strong> ${pelicula.descripcion}</p>
+                        <p><strong>Duración:</strong> ${pelicula.duracion} minutos</p>
+                        <p><strong>Año de creación:</strong> ${pelicula.año_creacion}</p>
+                        <p><strong>Saga:</strong> ${pelicula.saga}</p>
+                        <p><strong>Link al trailer:</strong> <a href="${pelicula.link_trailer}" target="_blank">Ver trailer</a></p>
+                        <p><strong>Link a la imagen:</strong> <a href="${pelicula.link_imagen}" target="_blank">Ver imagen</a></p>
                     `;
                 })
                 .catch(error => console.error('Error:', error));
-        });
+        }
     </script>
 </body>
 </html>

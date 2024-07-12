@@ -78,16 +78,16 @@ def datos_pelicula(id):
     if not pelicula:
         return jsonify({"message": "Película no encontrada"}), 404
     
-    return jsonify({
-        'titulo': pelicula.titulo,
-        'descripcion': pelicula.descripcion,
-        'duracion': pelicula.duracion,
-        'año_creacion': pelicula.año_creacion,
-        'saga': pelicula.saga,
-        'link_trailer': pelicula.link_trailer,
-        'link_imagen': pelicula.link_imagen
-    }), 200
+    return jsonify(pelicula.to_dict())
+
+@app.route('/pelicula/<int:id>/detalle', methods=['GET'])
+def detalle_pelicula(id):
+    pelicula = Pelicula.query.filter_by(id=id).first()
     
+    if not pelicula:
+        return jsonify({"message": "Película no encontrada"}), 404
+    
+    return render_template('pelicula.html', pelicula=pelicula)
 
 @app.route('/mi-lista', methods=['GET'])
 @login_required
@@ -95,7 +95,6 @@ def obtener_lista_usuario():
     mi_lista = MiLista.query.filter_by(id_usuario=current_user.id).all()
     peliculas = [Pelicula.query.filter_by(id=entry.id_pelicula).first().to_dict() for entry in mi_lista]
     return jsonify(peliculas), 200
-
 
 @app.route('/agregar-pelicula', methods=['POST'])
 @login_required
@@ -129,8 +128,6 @@ def eliminar_pelicula():
     db.session.commit()
 
     return jsonify({"id": id_pelicula}), 200
-
-
 
 if __name__ == '__main__':
     with app.app_context():
