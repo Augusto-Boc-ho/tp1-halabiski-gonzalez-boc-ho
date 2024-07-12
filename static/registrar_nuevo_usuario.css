@@ -49,19 +49,6 @@ body, html {
     margin-bottom: 20px;
     font-weight: bolder;
 }
-
-.login-container h5 {
-    margin:0 20px;
-    text-align: center;
-    color: white;
-}
-
-.form-check-label {
-    color: white;
-}
-
-.footer {
-    text-align: center;
+.btn {
     margin-top: 20px;
-    color: white;
 }
