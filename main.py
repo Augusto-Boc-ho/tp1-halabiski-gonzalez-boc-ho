@@ -80,7 +80,7 @@ def datos_pelicula(id):
     
     return jsonify(pelicula.to_dict())
 
-@app.route('/pelicula/<int:id>/detalle', methods=['GET'])
+@app.route('/peliculas/<int:id>/detalle', methods=['GET'])
 def detalle_pelicula(id):
     pelicula = Pelicula.query.filter_by(id=id).first()
     

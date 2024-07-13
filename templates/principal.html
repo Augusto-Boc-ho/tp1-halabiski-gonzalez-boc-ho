@@ -33,7 +33,7 @@
                             <p><strong>Link al trailer:</strong> <a href="${pelicula.link_trailer}" target="_blank">Ver trailer</a></p>
                             <p><strong>Link a la imagen:</strong> <a href="${pelicula.link_imagen}" target="_blank">Ver imagen</a></p>
                             <button class="button" id="add-${pelicula.id}" onclick="agregarPelicula(${pelicula.id})">Agregar a mi lista</button>
-                            <a href="/pelicula/${pelicula.id}/detalle" class="button">Ver más</a>
+                            <a href="/peliculas/${pelicula.id}/detalle" class="button">Ver más</a>
                         `;
                         document.getElementById('peliculas').appendChild(peliculaDiv);
                     });
