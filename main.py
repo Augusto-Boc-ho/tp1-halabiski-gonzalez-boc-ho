@@ -5,7 +5,7 @@ from flask_login import LoginManager, UserMixin, login_user, login_required, log
 from models import db, Usuario, Pelicula, MiLista
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://augusto:1234@localhost:5432/cameflix'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://tomi:123456789@localhost:5432/cameflix'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'mysecretkey'
 
@@ -71,7 +71,7 @@ def obtener_peliculas():
     peliculas_json = [pelicula.to_dict() for pelicula in lista_peliculas]
     return jsonify(peliculas_json)
 
-@app.route('/pelicula/<int:id>', methods=['GET'])
+@app.route('/peliculas/<int:id>', methods=['GET'])
 def datos_pelicula(id):
     pelicula = Pelicula.query.filter_by(id=id).first()
     
@@ -80,7 +80,7 @@ def datos_pelicula(id):
     
     return jsonify(pelicula.to_dict())
 
-@app.route('/pelicula/<int:id>/detalle', methods=['GET'])
+@app.route('/peliculas/<int:id>/detalle', methods=['GET'])
 def detalle_pelicula(id):
     pelicula = Pelicula.query.filter_by(id=id).first()
     

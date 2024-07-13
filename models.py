@@ -38,6 +38,10 @@ class Pelicula(db.Model):
     link_trailer = db.Column(db.String(255), nullable=False)
     link_imagen = db.Column(db.String(255), nullable=False)
     fecha_creacion = db.Column(db.DateTime, default=datetime.datetime.now)
+    puntuacion =db.Column(db.Numeric(2,1), nullable=False)
+    generos = db.Column(db.String(50), nullable=False)
+    protagonistas = db.Column(db.String(100), nullable=False)
+    director = db.Column(db.String(30), nullable=False)
 
     def to_dict(self):
         return {
