@@ -1,5 +1,4 @@
-import datetime
-from flask import Flask, request, jsonify, render_template, redirect, url_for
+from flask import Flask, request, jsonify, render_template, redirect, send_from_directory, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from models import db, Usuario, Pelicula, MiLista
@@ -8,6 +7,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://augusto:1234@localhost:5432/cameflix'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'mysecretkey'
+app.config['UPLOAD_FOLDER'] = 'app/static/pictures'  # Ruta donde se guardan las imágenes
 
 db.init_app(app)
 
@@ -133,6 +133,11 @@ def eliminar_pelicula():
     db.session.commit()
 
     return jsonify({"id": id_pelicula}), 200
+
+# obtener imagen de la pelicula desde la carpeta pictures
+@app.route('/pictures/<filename>')
+def uploaded_file(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
 if __name__ == '__main__':
     with app.app_context():

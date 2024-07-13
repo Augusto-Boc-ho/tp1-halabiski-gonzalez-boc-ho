@@ -67,7 +67,7 @@
                         peliculaDiv.className = 'col-md-4 mb-4';
                         peliculaDiv.innerHTML = `
                             <div class="card h-100">
-                                <img src="${pelicula.link_imagen}" class="card-img-top" alt="Imagen de ${pelicula.titulo}">
+                                <img src="/static/images/${pelicula.image_filename}" class="card-img-top" alt="Imagen de ${pelicula.titulo}">
                                 <div class="card-body">
                                     <h5 class="card-title">${pelicula.titulo}</h5>
                                     <p class="card-text"><strong>Descripción:</strong> ${pelicula.descripcion}</p>
@@ -97,7 +97,7 @@
                         peliculaDiv.id = `mi_lista-${pelicula.id}`;
                         peliculaDiv.innerHTML = `
                             <div class="card h-100">
-                                <img src="${pelicula.link_imagen}" class="card-img-top" alt="Imagen de ${pelicula.titulo}">
+                                <img src="/static/images/${pelicula.image_filename}" class="card-img-top" alt="Imagen de ${pelicula.titulo}">
                                 <div class="card-body">
                                     <h5 class="card-title">${pelicula.titulo}</h5>
                                     <p class="card-text"><strong>Descripción:</strong> ${pelicula.descripcion}</p>
@@ -132,7 +132,7 @@
                     peliculaDiv.id = `mi_lista-${data.id}`;
                     peliculaDiv.innerHTML = `
                         <div class="card h-100">
-                            <img src="${data.link_imagen}" class="card-img-top" alt="Imagen de ${data.titulo}">
+                            <img src="/static/images/${data.image_filename}" class="card-img-top" alt="Imagen de ${data.titulo}">
                             <div class="card-body">
                                 <h5 class="card-title">${data.titulo}</h5>
                                 <p class="card-text"><strong>Descripción:</strong> ${data.descripcion}</p>

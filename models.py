@@ -36,7 +36,7 @@ class Pelicula(db.Model):
     año_creacion = db.Column(db.Integer, nullable=False)
     saga = db.Column(db.String(255), nullable=False)
     link_trailer = db.Column(db.String(255), nullable=False)
-    link_imagen = db.Column(db.String(255), nullable=False)
+    image_filename = db.Column(db.String(100), nullable=False)
     fecha_creacion = db.Column(db.DateTime, default=datetime.datetime.now)
     puntuacion = db.Column(db.Numeric(2, 1), nullable=False, default=0)
     generos = db.Column(db.String(50), nullable=False, default='No disponible')
@@ -52,7 +52,7 @@ class Pelicula(db.Model):
             'año_creacion': self.año_creacion,
             'saga': self.saga,
             'link_trailer': self.link_trailer,
-            'link_imagen': self.link_imagen,
+            'image_filename': self.image_filename,
             'fecha_creacion': self.fecha_creacion,
             'puntuacion': float(self.puntuacion),  # Convertir a float para JSON serializable
             'generos': self.generos,
