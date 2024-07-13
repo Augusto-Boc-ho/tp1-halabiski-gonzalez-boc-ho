@@ -38,10 +38,10 @@ class Pelicula(db.Model):
     link_trailer = db.Column(db.String(255), nullable=False)
     link_imagen = db.Column(db.String(255), nullable=False)
     fecha_creacion = db.Column(db.DateTime, default=datetime.datetime.now)
-    puntuacion =db.Column(db.Numeric(2,1), nullable=False)
-    generos = db.Column(db.String(50), nullable=False)
-    protagonistas = db.Column(db.String(100), nullable=False)
-    director = db.Column(db.String(30), nullable=False)
+    puntuacion = db.Column(db.Numeric(2, 1), nullable=False, default=0)
+    generos = db.Column(db.String(50), nullable=False, default='No disponible')
+    protagonistas = db.Column(db.String(100), nullable=False, default='No disponible')
+    director = db.Column(db.String(30), nullable=False, default='No disponible')
 
     def to_dict(self):
         return {
@@ -53,7 +53,11 @@ class Pelicula(db.Model):
             'saga': self.saga,
             'link_trailer': self.link_trailer,
             'link_imagen': self.link_imagen,
-            'fecha_creacion': self.fecha_creacion
+            'fecha_creacion': self.fecha_creacion,
+            'puntuacion': float(self.puntuacion),  # Convertir a float para JSON serializable
+            'generos': self.generos,
+            'protagonistas': self.protagonistas,
+            'director': self.director
         }
 
 class MiLista(db.Model):

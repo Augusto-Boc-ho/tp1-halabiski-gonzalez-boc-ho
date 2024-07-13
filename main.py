@@ -5,7 +5,7 @@ from flask_login import LoginManager, UserMixin, login_user, login_required, log
 from models import db, Usuario, Pelicula, MiLista
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://tomi:123456789@localhost:5432/cameflix'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://augusto:1234@localhost:5432/cameflix'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'mysecretkey'
 
@@ -33,7 +33,8 @@ def login():
             login_user(user)
             return redirect(url_for('pagina_principal'))
         else:
-            return jsonify({"message": "Credenciales inválidas"}), 401
+            message = "Credenciales inválidas. Por favor, verifique su correo electrónico y contraseña."
+            return render_template('login.html', message=message)
 
     return render_template('login.html')
 
