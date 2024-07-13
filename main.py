@@ -106,6 +106,10 @@ def agregar_pelicula():
         if not pelicula:
             return jsonify({"message": "Película no encontrada"}), 404
 
+        # Verificar si la película ya está en la lista del usuario
+        if MiLista.query.filter_by(id_usuario=current_user.id, id_pelicula=id_pelicula).first():
+            return jsonify({"message": "La película ya está en tu lista"}), 400
+
         nueva_pelicula = MiLista(id_usuario=current_user.id, id_pelicula=id_pelicula)
         db.session.add(nueva_pelicula)
         db.session.commit()

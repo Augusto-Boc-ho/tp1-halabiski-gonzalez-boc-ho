@@ -7,7 +7,7 @@ body, html {
 .background {
     background-image: url('pictures/facultad-ingenieria-ubajpg.webp');
     background-size: cover;
-    background-position: center center;
+    background-position: center;
     height: 100%;
     display: flex;
     align-items: center;
@@ -20,40 +20,51 @@ body, html {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    display: flex;
-    flex-direction: column;
     max-width: 400px;
     width: 100%;
-    max-height: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .navbar {
-    margin-bottom: 30px;
+    width: 100%;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+}
+
+.logo {
+    max-width: 120px;
+    height: auto;
 }
 
 .login-container {
+    width: 100%;
     padding: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
     border-radius: 10px;
-}
-
-.form-control {
-    opacity: 0.85;
-    background-color: lightgrey;
-}
-
-.form-control:focus {
-    box-shadow: 0 0 10px cyan;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .login-form h2 {
     margin-bottom: 20px;
     font-weight: bolder;
-}
-
-.login-container h5 {
-    margin:0 20px;
     text-align: center;
     color: white;
+}
+
+.form-control {
+    background-color: lightgrey;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.form-control:focus {
+    box-shadow: 0 0 10px cyan;
+    outline: none;
 }
 
 .form-check-label {
