@@ -55,9 +55,9 @@
         <p><strong>Año de creación:</strong> {{ pelicula.año_creacion }}</p>
         <p><strong>Saga:</strong> {{ pelicula.saga }}</p>
         <p><strong>Director:</strong> {{ pelicula.director }}</p>
-        <p><strong>Reparto:</strong> {{ pelicula.reparto }}</p>
-        <p><strong>Género:</strong> {{ pelicula.genero }}</p>
-        <p><strong>Calificación:</strong> {{ pelicula.calificacion }}</p>
+        <p><strong>Reparto:</strong> {{ pelicula.protagonistas }}</p>
+        <p><strong>Género:</strong> {{ pelicula.generos }}</p>
+        <p><strong>Calificación:</strong> {{ pelicula.puntuacion }}</p>
         <p><strong>Link al trailer:</strong> <a href="{{ pelicula.link_trailer }}" target="_blank" class="btn btn-secondary">Ver trailer</a></p>
         <button class="btn btn-primary" id="add-{{ pelicula.id }}" onclick="agregarPelicula('{{ pelicula.id }}')">Agregar a mi lista</button>
         <button class="btn btn-danger" id="remove-{{ pelicula.id }}" onclick="eliminarPelicula('{{ pelicula.id }}')">Eliminar de mi lista</button>
