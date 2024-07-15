@@ -27,24 +27,13 @@
         .btn-primary:hover, .btn-secondary:hover, .btn-danger:hover {
             background-color: #f40612;
         }
-        .button-logout {
-            background-color: #e50914;
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 5px;
-            display: inline-block;
-        }
-        .button-logout:hover {
-            background-color: #f40612;
-            color: white;
-        }
         .img-fluid {
             max-width: 100%;
             height: auto;
             margin-bottom: 20px;
         }
     </style>
+    <script src="https://www.youtube.com/iframe_api" async></script>
 </head>
 <body>
     <div class="container mt-5">
@@ -58,13 +47,23 @@
         <p><strong>Reparto:</strong> {{ pelicula.protagonistas }}</p>
         <p><strong>Género:</strong> {{ pelicula.generos }}</p>
         <p><strong>Calificación:</strong> {{ pelicula.puntuacion }}</p>
-        <p><strong>Link al trailer:</strong> <a href="{{ pelicula.link_trailer }}" target="_blank" class="btn btn-secondary">Ver trailer</a></p>
+        <p><strong>trailer:</strong></p>
+        <div id="player"></div><br>
         <button class="btn btn-primary" id="add-{{ pelicula.id }}" onclick="agregarPelicula('{{ pelicula.id }}')">Agregar a mi lista</button>
         <button class="btn btn-danger" id="remove-{{ pelicula.id }}" onclick="eliminarPelicula('{{ pelicula.id }}')">Eliminar de mi lista</button>
         <a href="{{ url_for('pagina_principal') }}" class="btn btn-secondary">Volver a la página principal</a>
         <div id="mensaje" class="mt-3"></div>
     </div>
     <script>
+        function onYouTubeIframeAPIReady() {
+                var videoId = '{{ pelicula.link_trailer.split("v=")[1] }}';
+                var player = new YT.Player('player', {
+                    height: '360',
+                    width: '640',
+                    videoId: videoId,
+                });
+            }
+        
         function agregarPelicula(idPelicula) {
             fetch('/agregar-pelicula', {
                 method: 'POST',

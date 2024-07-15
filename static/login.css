@@ -7,7 +7,7 @@ body, html {
 .background {
     background-image: url('pictures/facultad-ingenieria-ubajpg.webp');
     background-size: cover;
-    background-position: center;
+    background-position: center center;
     height: 100%;
     display: flex;
     align-items: center;
@@ -21,10 +21,10 @@ body, html {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     max-width: 400px;
+    max-height: 500px;
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
 }
 
 .navbar {
@@ -42,19 +42,15 @@ body, html {
 .login-container {
     width: 100%;
     padding: 20px;
-    background-color: rgba(255, 255, 255, 0.1);
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .login-form h2 {
-    margin-bottom: 20px;
     font-weight: bolder;
-    text-align: center;
-    color: white;
 }
 
 .form-control {
+    opacity: 0.85;
     background-color: lightgrey;
     border: none;
     border-radius: 5px;
@@ -71,9 +67,9 @@ body, html {
     color: white;
 }
 
-.footer {
+.login-container h5{
+    margin:0 20px;
     text-align: center;
-    margin-top: 20px;
     color: white;
 }
 .btn btn-primary w-100 {

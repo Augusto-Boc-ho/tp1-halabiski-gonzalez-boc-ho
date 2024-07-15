@@ -33,14 +33,29 @@
             text-decoration: none;
             border-radius: 5px;
             display: inline-block;
+            position: absolute;
+            top: 9px;
+            right: 9px;
         }
         .button-logout:hover {
             background-color: #f40612;
             color: white;
         }
+        .header {
+            position: relative;
+            text-align: center;
+            padding: 20px;
+        }
+        .logo {
+            width: 300px;
+        }
     </style>
 </head>
 <body>
+    <div class="header">
+        <img src="../static/pictures/logo-tp1.jpeg" alt="Logo" class="logo">
+        <a href="{{ url_for('logout') }}" class="button-logout">Logout</a>
+    </div>
     <div class="container mt-5">
         <h1 id="bienvenida"></h1>
         <a href="{{ url_for('logout') }}" class="button-logout">Logout</a>
