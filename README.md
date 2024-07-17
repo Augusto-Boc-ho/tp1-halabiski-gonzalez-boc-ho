@@ -18,3 +18,4 @@ source venv/bin/activate
 cd backend
 flask --app main.py run --debug
 ```
+

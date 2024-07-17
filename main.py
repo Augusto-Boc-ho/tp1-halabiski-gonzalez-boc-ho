@@ -55,6 +55,46 @@ def registrarse():
         return redirect(url_for('login'))
     return render_template('registrar_nuevo_usuario.html')
 
+@app.route('/recuperar-contraseña', methods=['GET'])
+def recuperar_contraseña():
+    return render_template('recuperar_contraseña.html')
+
+@app.route('/cambiar-contraseña', methods=['POST'])
+def cambiar_contraseña():
+    email = request.form['email']
+    password = request.form['password']
+
+    if not email or not password:
+        return jsonify({"message": "Todos los campos son obligatorios"}), 400
+
+    user = Usuario.query.filter_by(email=email).first()
+
+    if not user:
+        return jsonify({"message": "Usuario no encontrado"}), 404
+
+    user.contraseña = password
+    db.session.commit()
+
+    return redirect(url_for('login'))
+
+@app.route('/eliminar-cuenta', methods=['POST'])
+def eliminar_cuenta():
+    email = request.form['email']
+    password = request.form['password']
+
+    user = Usuario.query.filter_by(email=email).first()
+
+    if not user:
+        return jsonify({"message": "Usuario no encontrado"}), 404
+
+    if user.contraseña != password:
+        return jsonify({"message": "Contraseña incorrecta"}), 400
+
+    db.session.delete(user)
+    db.session.commit()
+
+    return redirect(url_for('login'))
+
 @app.route('/pagina_principal')
 @login_required
 def pagina_principal():
