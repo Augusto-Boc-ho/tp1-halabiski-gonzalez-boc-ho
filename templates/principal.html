@@ -70,14 +70,24 @@
         <h1 id="bienvenida"></h1>
         <button id="botonEliminarCuenta" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#eliminarCuentaModal" 
                 onmouseover="mostrarAviso()" onmouseout="ocultarAviso()">Eliminar cuenta</button>
-        <p>Para poder eliminar tu cuenta, primero asegúrate de tener tu lista de películas vacía.</p>
+        <p>¡Aviso! No vas a poder eliminar tu cuenta si tenes películas en tu lista.</p>
+        <a href="{{ url_for('editar_datos_usuario') }}" class="btn btn-secondary">Editar datos del usuario</a>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert alert-{{ category }} mt-3">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
         <a href="{{ url_for('logout') }}" class="button-logout">Logout</a>
         <div class="mt-4">
             <h2>Mi lista</h2>
             <div class="row" id="mi_lista"></div>
         </div>
         <div class="mt-4">
-            <h2>¡Aquí están todas las películas disponibles!</h2>
+            <h2>¡Aca están todas las películas disponibles!</h2>
             <div class="row" id="peliculas"></div>
         </div>
     </div>

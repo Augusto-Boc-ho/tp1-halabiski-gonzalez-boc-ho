@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, render_template, redirect, send_from_directory, url_for
+from flask import Flask, flash, request, jsonify, render_template, redirect, send_from_directory, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from models import db, Usuario, Pelicula, MiLista
@@ -94,6 +94,27 @@ def eliminar_cuenta():
     db.session.commit()
 
     return redirect(url_for('login'))
+
+@app.route('/editar_datos_usuario', methods=['GET'])
+@login_required
+def editar_datos_usuario():
+    return render_template('editar_datos_usuario.html')
+
+@app.route('/editar_usuario', methods=['POST'])
+@login_required
+def editar_usuario():
+    nombre = request.form['nombre']
+    email = request.form['email']
+    password = request.form['password']
+
+    if current_user.is_authenticated:
+        current_user.nombre = nombre
+        current_user.email = email
+        if password:
+            current_user.contraseña = password  # Simplemente guarda la contraseña en texto plano (no recomendado para producción)
+        db.session.commit()
+        flash('Tus datos han sido actualizados', 'success')
+    return redirect(url_for('pagina_principal'))
 
 @app.route('/pagina_principal')
 @login_required
