@@ -15,7 +15,6 @@ pip install flask-login
 
 ```bash
 source venv/bin/activate
-cd backend
-flask --app main.py run --debug
+flask --app main.py run --debug  (alternatively, use: python3 main.py)
 ```
 

@@ -44,6 +44,10 @@
         <a href="{{ url_for('pagina_principal') }}" class="btn btn-secondary">Volver</a>
         <div class="card">
             <div class="card-body">
+                <h5 class="card-title">Datos Actuales</h5>
+                <p class="card-text"><strong>Nombre:</strong> {{ current_user.nombre }}</p>
+                <p class="card-text"><strong>Correo electrónico:</strong> {{ current_user.email }}</p>
+                <p class="card-text"><strong>Contraseña:</strong> {{ current_user.contraseña }}</p>
                 <h5 class="card-title">Editar Datos del Usuario</h5>
                 <form id="editarUsuarioForm" action="{{ url_for('editar_usuario') }}" method="post">
                     <div class="mb-3">
