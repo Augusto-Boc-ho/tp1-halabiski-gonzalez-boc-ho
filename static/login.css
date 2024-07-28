@@ -106,4 +106,16 @@ body, html {
     text-decoration: none;
     text-align: center;
 }
+.btn-back {
+    background-color: rgba(255, 17, 0, 0.712);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    max-width: 70px;
+}
 
