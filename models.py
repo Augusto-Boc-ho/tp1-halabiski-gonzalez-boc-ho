@@ -40,7 +40,7 @@ class Pelicula(db.Model):
     fecha_creacion = db.Column(db.DateTime, default=datetime.datetime.now)
     puntuacion = db.Column(db.Numeric(2, 1), nullable=False, default=0)
     generos = db.Column(db.String(50), nullable=False, default='No disponible')
-    protagonistas = db.Column(db.String(100), nullable=False, default='No disponible')
+    Protagonistas = db.Column(db.String(100), nullable=False, default='No disponible')
     director = db.Column(db.String(30), nullable=False, default='No disponible')
 
     def to_dict(self):
@@ -56,7 +56,7 @@ class Pelicula(db.Model):
             'fecha_creacion': self.fecha_creacion,
             'puntuacion': float(self.puntuacion),  # Convertir a float para JSON serializable
             'generos': self.generos,
-            'protagonistas': self.protagonistas,
+            'protagonistas': self.Protagonistas,
             'director': self.director
         }
 

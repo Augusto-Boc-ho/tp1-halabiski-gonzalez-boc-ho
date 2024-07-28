@@ -4,7 +4,7 @@ from flask_login import LoginManager, UserMixin, login_user, login_required, log
 from models import db, Usuario, Pelicula, MiLista
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://augusto:1234@localhost:5432/cameflix'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://valenhala:1234@localhost:5432/valentin'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'mysecretkey'
 app.config['UPLOAD_FOLDER'] = 'app/static/pictures'  # Ruta donde se guardan las imágenes
