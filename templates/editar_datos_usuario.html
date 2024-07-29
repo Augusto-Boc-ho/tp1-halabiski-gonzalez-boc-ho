@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Datos del Usuario</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #141414;
+            color: #fff;
+        }
+        .card {
+            background-color: #333;
+            border: none;
+        }
+        .card-title, .card-text {
+            color: #fff;
+        }
+        .btn-primary, .btn-secondary {
+            background-color: #e50914;
+            border: none;
+            margin: 5px;
+        }
+        .btn-primary:hover, .btn-secondary:hover {
+            background-color: #f40612;
+        }
+        .form-label-modal {
+            color: #000;
+            font-size: 20px;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        }
+        .container {
+            margin-top: 70px;
+        }
+        .card-title {
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <a href="{{ url_for('pagina_principal') }}" class="btn btn-secondary">Volver</a>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Datos Actuales</h5>
+                <p class="card-text"><strong>Nombre:</strong> {{ current_user.nombre }}</p>
+                <p class="card-text"><strong>Correo electrónico:</strong> {{ current_user.email }}</p>
+                <p class="card-text"><strong>Contraseña:</strong> {{ current_user.contraseña }}</p>
+                <h5 class="card-title">Editar Datos del Usuario</h5>
+                <form id="editarUsuarioForm" action="{{ url_for('editar_usuario') }}" method="post">
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label-modal">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" value="{{ current_user.nombre }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label-modal">Correo electrónico</label>
+                        <input type="email" class="form-control" id="email" name="email" value="{{ current_user.email }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label-modal">Nueva contraseña</label>
+                        <input type="password" class="form-control" id="password" name="password">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

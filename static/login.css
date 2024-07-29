@@ -1,0 +1,121 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+.background {
+    background-image: url('pictures/facultad-ingenieria-ubajpg.webp');
+    background-size: cover;
+    background-position: center center;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: cyan;
+}
+
+.container {
+    background-color: rgba(37, 37, 37, 0.75);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 500px;
+    max-height: 800px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar {
+    width: 100%;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+}
+
+.logo {
+    max-width: 300px;
+    height: auto;
+}
+
+.login-container {
+    width: 100%;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.login-form h2 {
+    font-weight: bolder;
+}
+
+.form-control {
+    opacity: 0.85;
+    background-color: lightgrey;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.form-control:focus {
+    box-shadow: 0 0 10px cyan;
+    outline: none;
+}
+
+.form-check-label {
+    color: white;
+}
+
+.login-container h5{
+    margin:0 20px;
+    text-align: center;
+    color: white;
+}
+.btn btn-primary w-100 {
+    background-color: cyan;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+.btn-fp{
+    background-color: rgba(255, 17, 0, 0.712);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+.btn-register {
+    background-color: rgba(167, 164, 163, 0.712);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    width: 200px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+}
+.btn-back {
+    background-color: rgba(255, 17, 0, 0.712);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    max-width: 70px;
+}
+

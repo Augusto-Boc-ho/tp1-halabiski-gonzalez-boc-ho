@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Principal</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            background-color: #141414;
+            color: #fff;
+        }
+        .card {
+            background-color: #333;
+            border: none;
+        }
+        .card-title, .card-text {
+            color: #fff;
+        }
+        .btn-primary, .btn-secondary, .btn-danger {
+            background-color: #e50914;
+            border: none;
+            margin: 5px;
+        }
+        .btn-primary:hover, .btn-secondary:hover, .btn-danger:hover {
+            background-color: #f40612;
+        }
+        .button-logout {
+            background-color: #e50914;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+            position: absolute;
+            top: 9px;
+            right: 9px;
+        }
+        .button-logout:hover {
+            background-color: #f40612;
+            color: white;
+        }
+        .header {
+            position: relative;
+            text-align: center;
+            padding: 20px;
+        }
+        .logo {
+            width: 300px;
+        }
+        .form-label-modal {
+            color: #000;
+        }
+        .modal-title {
+            color: #000;
+        }
+        #avisoEliminarCuenta {
+            display: none;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="../static/pictures/logo-tp1.jpeg" alt="Logo" class="logo">
+        <a href="{{ url_for('logout') }}" class="button-logout">Logout</a>
+    </div>
+    <div class="container mt-5">
+        <h1 id="bienvenida"></h1>
+        <button id="botonEliminarCuenta" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#eliminarCuentaModal" 
+                onmouseover="mostrarAviso()" onmouseout="ocultarAviso()">Eliminar cuenta</button>
+        <p>¡Aviso! No vas a poder eliminar tu cuenta si tenes películas en tu lista.</p>
+        <a href="{{ url_for('editar_datos_usuario') }}" class="btn btn-secondary">Editar datos del usuario</a>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert alert-{{ category }} mt-3">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+        <a href="{{ url_for('logout') }}" class="button-logout">Logout</a>
+        <div class="mt-4">
+            <h2>Mi lista</h2>
+            <div class="row" id="mi_lista"></div>
+        </div>
+        <div class="mt-4">
+            <h2>¡Aca están todas las películas disponibles!</h2>
+            <div class="row" id="peliculas"></div>
+        </div>
+    </div>
+
+    <!-- Modal para confirmar la eliminación de la cuenta -->
+    <div class="modal fade" id="eliminarCuentaModal" tabindex="-1" aria-labelledby="eliminarCuentaModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="eliminarCuentaModalLabel">Eliminar cuenta</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="eliminarCuentaForm" action="{{ url_for('eliminar_cuenta') }}" method="post">
+                        <div class="mb-3">
+                            <label class="form-label-modal">Por favor, primero confirme sus datos</label>
+                            <br>
+                            <br>
+                            <label for="email" class="form-label-modal">Correo electrónico</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label-modal">Contraseña</label>
+                            <input type="password" class="form-control" id="password" name="password" required>
+                        </div>
+                        <button type="submit" class="btn btn-danger">Confirmar eliminación</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const userName = "{{ nombre }}";
+        document.getElementById('bienvenida').innerText = '¡Bienvenido, ' + userName + '!';
+
+        function mostrarAviso() {
+            const listaPeliculas = document.getElementById('mi_lista').children;
+            if (listaPeliculas.length > 0) {
+                document.getElementById('avisoEliminarCuenta').style.display = 'block';
+            }
+        }
+
+        function ocultarAviso() {
+            document.getElementById('avisoEliminarCuenta').style.display = 'none';
+        }
+
+        function obtenerPeliculas() {
+            fetch('/peliculas')
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(pelicula => {
+                        const peliculaDiv = document.createElement('div');
+                        peliculaDiv.className = 'col-md-4 mb-4';
+                        peliculaDiv.innerHTML = `
+                            <div class="card h-100">
+                                <img src="/static/images/${pelicula.image_filename}" class="card-img-top" alt="Imagen de ${pelicula.titulo}">
+                                <div class="card-body">
+                                    <h5 class="card-title">${pelicula.titulo}</h5>
+                                    <p class="card-text"><strong>Descripción:</strong> ${pelicula.descripcion}</p>
+                                    <p class="card-text"><strong>Duración:</strong> ${pelicula.duracion} minutos</p>
+                                    <p class="card-text"><strong>Año de creación:</strong> ${pelicula.año_creacion}</p>
+                                    <p class="card-text"><strong>Saga:</strong> ${pelicula.saga}</p>
+                                    <a href="${pelicula.link_trailer}" target="_blank" class="btn btn-secondary">Ver trailer</a>
+                                    <button class="btn btn-primary" id="add-${pelicula.id}" onclick="agregarPelicula(${pelicula.id})">Agregar a mi lista</button>
+                                    <a href="/peliculas/${pelicula.id}/detalle" class="btn btn-secondary">Ver más</a>
+                                </div>
+                            </div>
+                        `;
+                        document.getElementById('peliculas').appendChild(peliculaDiv);
+                    });
+                    obtenerListaUsuario();
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        function obtenerListaUsuario() {
+            fetch('/mi-lista')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.length > 0) {
+                        document.getElementById('botonEliminarCuenta').disabled = true;
+                    }
+                    data.forEach(pelicula => {
+                        const peliculaDiv = document.createElement('div');
+                        peliculaDiv.className = 'col-md-4 mb-4';
+                        peliculaDiv.id = `mi_lista-${pelicula.id}`;
+                        peliculaDiv.innerHTML = `
+                            <div class="card h-100">
+                                <img src="/static/images/${pelicula.image_filename}" class="card-img-top" alt="Imagen de ${pelicula.titulo}">
+                                <div class="card-body">
+                                    <h5 class="card-title">${pelicula.titulo}</h5>
+                                    <p class="card-text"><strong>Descripción:</strong> ${pelicula.descripcion}</p>
+                                    <p class="card-text"><strong>Duración:</strong> ${pelicula.duracion} minutos</p>
+                                    <p class="card-text"><strong>Año de creación:</strong> ${pelicula.año_creacion}</p>
+                                    <p class="card-text"><strong>Saga:</strong> ${pelicula.saga}</p>
+                                    <a href="${pelicula.link_trailer}" target="_blank" class="btn btn-secondary">Ver trailer</a>
+                                    <button class="btn btn-danger" onclick="eliminarPelicula(${pelicula.id})">Eliminar de mi lista</button>
+                                </div>
+                            </div>
+                        `;
+                        document.getElementById('mi_lista').appendChild(peliculaDiv);
+                        document.getElementById(`add-${pelicula.id}`).disabled = true;
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        function agregarPelicula(idPelicula) {
+            fetch('/agregar-pelicula', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ id_pelicula: idPelicula })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.id) {
+                    const peliculaDiv = document.createElement('div');
+                    peliculaDiv.className = 'col-md-4 mb-4';
+                    peliculaDiv.id = `mi_lista-${data.id}`;
+                    peliculaDiv.innerHTML = `
+                        <div class="card h-100">
+                            <img src="/static/images/${data.image_filename}" class="card-img-top" alt="Imagen de ${data.titulo}">
+                            <div class="card-body">
+                                <h5 class="card-title">${data.titulo}</h5>
+                                <p class="card-text"><strong>Descripción:</strong> ${data.descripcion}</p>
+                                <p class="card-text"><strong>Duración:</strong> ${data.duracion} minutos</p>
+                                <p class="card-text"><strong>Año de creación:</strong> ${data.año_creacion}</p>
+                                <p class="card-text"><strong>Saga:</strong> ${data.saga}</p>
+                                <a href="${data.link_trailer}" target="_blank" class="btn btn-secondary">Ver trailer</a>
+                                <button class="btn btn-danger" onclick="eliminarPelicula(${data.id})">Eliminar de mi lista</button>
+                            </div>
+                        </div>
+                    `;
+                    document.getElementById('mi_lista').appendChild(peliculaDiv);
+                    document.getElementById(`add-${data.id}`).disabled = true;
+                    document.getElementById('botonEliminarCuenta').disabled = true;
+                } else {
+                    console.error('Error al agregar la película:', data.message);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        function eliminarPelicula(idPelicula) {
+            fetch('/eliminar-pelicula', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ id_pelicula: idPelicula })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.id) {
+                    const peliculaDiv = document.getElementById(`mi_lista-${data.id}`);
+                    document.getElementById('mi_lista').removeChild(peliculaDiv);
+                    document.getElementById(`add-${data.id}`).disabled = false;
+                    if (document.getElementById('mi_lista').children.length === 0) {
+                        document.getElementById('botonEliminarCuenta').disabled = false;
+                    }
+                } else {
+                    console.error('Error al eliminar la película:', data.message);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        window.onload = obtenerPeliculas;
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

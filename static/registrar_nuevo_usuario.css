@@ -1,0 +1,71 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+.background {
+    background-image: url('pictures/facultad-ingenieria-ubajpg.webp');
+    background-size: cover;
+    background-position: center center;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: cyan;
+}
+.logo{
+    width: 300px;
+    margin-top: 10px;
+    margin-left: 80px;
+}
+.container {
+    background-color: rgba(37, 37, 37, 0.75);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    width: 100%;
+    max-height: 700px;
+}
+
+.navbar {
+    margin-bottom: 30px;
+}
+.btn-back {
+    background-color: rgba(255, 17, 0, 0.712);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    max-width: 70px;
+}
+
+.login-container {
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.form-control {
+    opacity: 0.85;
+    background-color: lightgrey;
+}
+
+.form-control:focus {
+    box-shadow: 0 0 10px cyan;
+}
+
+.login-form h2 {
+    margin-bottom: 20px;
+    font-weight: bolder;
+}
+.btn {
+    margin-top: 10px;
+}
+
